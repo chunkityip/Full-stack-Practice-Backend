@@ -1,30 +1,41 @@
 package com.example.demo.entity;
 
+import com.example.demo.enums.EmployeeStatus;
 import jakarta.persistence.*;
+import lombok.*;
+
 
 @Entity
 @Table(name = "employees")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
-    // Use meaningful names
     @Column(nullable = false)
     private String fullName;
 
     private String department;
 
-    public Employee() {}
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EmployeeStatus status;
 
-    // getters & setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // Set the default status to DRAFT when creating new employee
+    @PrePersist
+    public void prePersist() {
+        if (this.status == null) {
+            this.status = EmployeeStatus.DRAFT;
+        }
+    }
 
-    public String getFullName() { return fullName; }
-    public void setFullName(String fullName) { this.fullName = fullName; }
 
-    public String getDepartment() { return department; }
-    public void setDepartment(String department) { this.department = department; }
 }

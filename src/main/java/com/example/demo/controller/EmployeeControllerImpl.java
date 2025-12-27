@@ -52,4 +52,22 @@ public class EmployeeControllerImpl implements EmployeeController {
         employeeService.deleteEmployee(id);
         return ResponseEntity.noContent().build();
     }
+
+    @Operation(summary = "Submit employee for approval (DRAFT → PENDING_APPROVAL)")
+    @Override
+    public ResponseEntity<Employee> submitForApproval(Long id) {
+        return ResponseEntity.ok(employeeService.submitForApproval(id));
+    }
+
+    @Operation(summary = "Approve employee (PENDING_APPROVAL → APPROVED)")
+    @Override
+    public ResponseEntity<Employee> approve(Long id) {
+        return ResponseEntity.ok(employeeService.approve(id));
+    }
+
+    @Operation(summary = "Reject employee (PENDING_APPROVAL → REJECTED)")
+    @Override
+    public ResponseEntity<Employee> reject(Long id) {
+        return ResponseEntity.ok(employeeService.reject(id));
+    }
 }

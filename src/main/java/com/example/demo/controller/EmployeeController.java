@@ -22,7 +22,15 @@ public interface EmployeeController {
     @PutMapping("/{id}")
     ResponseEntity<Employee> updateEmployee(@PathVariable Long id,
                                             @RequestBody Employee payload);
-
     @DeleteMapping("/{id}")
     ResponseEntity<Void> deleteEmployee(@PathVariable Long id);
+
+    @PatchMapping("/{id}/submit")
+    ResponseEntity<Employee> submitForApproval(@PathVariable Long id);
+
+    @PatchMapping("/{id}/approve")
+    ResponseEntity<Employee> approve(@PathVariable Long id);
+
+    @PatchMapping("/{id}/reject")
+    ResponseEntity<Employee> reject(@PathVariable Long id);
 }

@@ -11,4 +11,7 @@ public interface EmployeeService {
     List<Employee> getAllEmployees();
     Employee updateEmployee(Long id, Employee employee);
     void deleteEmployee(Long id);
+    Employee submitForApproval(Long id);
+    Employee approve(Long id);
+    Employee reject(Long id);
 }
